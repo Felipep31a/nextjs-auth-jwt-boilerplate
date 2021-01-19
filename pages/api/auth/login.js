@@ -3,8 +3,6 @@ import Users from '../../../models/Users'
 import connectDB from '../../../utils/connectDB'
 import { createAccessToken, createRefreshToken } from '../../../utils/generateToken'
 
-
-
 export default async (req, res) => {
 
     switch (req.method) {

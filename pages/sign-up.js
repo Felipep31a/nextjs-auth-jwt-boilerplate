@@ -9,23 +9,23 @@ const SignUp = () => {
 
   const initialState = { name: '', email: '', password: '', cpassword: '' }
   const [form, setForm] = useState(initialState)
-  const [state, dispath] = useContext(DataContext)
+  const [state, dispatch] = useContext(DataContext)
 
   const handleChangeInput = e => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
-    dispath({ type: ACTIONS.NOTIFY, payload: {} })
+    dispatch({ type: ACTIONS.NOTIFY, payload: {} })
   }
 
   const handleSubmit = async e => {
     e.preventDefault()
     const errs = validateRegister(name, email, password, cpassword)
-    if (errs) return dispath({ type: ACTIONS.NOTIFY, payload: { error: errs } })
+    if (errs) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: errs } })
 
     const res = await postMethod('auth/register', form)
-    if (res.err) return dispath({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
+    if (res.err) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
 
-    dispath({ type: ACTIONS.NOTIFY, payload: { success: '' } })
+    dispatch({ type: ACTIONS.NOTIFY, payload: { success: '' } })
 
   }
 

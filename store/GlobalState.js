@@ -6,7 +6,7 @@ import ACTIONS from './Actions'
 export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
-    const initial = { notify: {}, auth: {} }
+    const initial = { notify: {}, auth: {user: null} }
     const [state, dispath] = useReducer(reducers, initial)
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export const DataProvider = ({ children }) => {
 
         if (firstLogin) {
             getMethod('auth/accessToken').then(res => {
-                console.log('res.err',res.err)
+             
                 if (res.err) return localStorage.removeItem('firstLogin')
                 
                 dispath({

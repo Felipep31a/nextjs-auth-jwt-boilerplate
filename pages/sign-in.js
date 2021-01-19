@@ -4,31 +4,32 @@ import ACTIONS from '../store/Actions'
 import { DataContext } from '../store/GlobalState'
 import { postMethod } from '../utils/fetch'
 import Cookie from 'js-cookie'
+import Router from 'next/router'
 
 const SignIn = () => {
 
   const initialState = { email: '', password: '' }
   const [form, setForm] = useState(initialState)
-  const [state, dispath] = useContext(DataContext)
+  const [state, dispatch] = useContext(DataContext)
 
   const handleChangeInput = e => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
-    dispath({ type: ACTIONS.NOTIFY, payload: {} })
+    dispatch({ type: ACTIONS.NOTIFY, payload: {} })
   }
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    dispath({ type: ACTIONS.NOTIFY, payload: { loading: true } })
+    dispatch({ type: ACTIONS.NOTIFY, payload: { loading: true } })
 
     const res = await postMethod('auth/login', form)
-    console.log(res)
-    if (res.err) return dispath({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
 
-    dispath({ type: ACTIONS.NOTIFY, payload: { success: res.msg } })
+    if (res.err) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
 
-    dispath({
+    dispatch({ type: ACTIONS.NOTIFY, payload: { success: res.msg } })
+
+    dispatch({
       type: ACTIONS.AUTH, payload: {
         token: res.access_token,
         user: res.user
@@ -41,6 +42,7 @@ const SignIn = () => {
     })
 
     localStorage.setItem('firstLogin', true)
+    Router.push('/')
   }
 
   const { email, password } = form

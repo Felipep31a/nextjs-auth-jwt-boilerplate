@@ -4,6 +4,7 @@ import ACTIONS from '../store/Actions'
 import { DataContext } from '../store/GlobalState'
 import { postMethod } from '../utils/fetch'
 import { validateRegister } from '../utils/valid'
+import Router from 'next/router'
 
 const SignUp = () => {
 
@@ -19,13 +20,17 @@ const SignUp = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+
+    dispatch({ type: ACTIONS.NOTIFY, payload: { loading: true } })
+
     const errs = validateRegister(name, email, password, cpassword)
     if (errs) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: errs } })
 
     const res = await postMethod('auth/register', form)
     if (res.err) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
 
-    dispatch({ type: ACTIONS.NOTIFY, payload: { success: '' } })
+    dispatch({ type: ACTIONS.NOTIFY, payload: { success: 'Conta criada com sucesso!' } })
+    Router.push('/')
 
   }
 
@@ -34,6 +39,12 @@ const SignUp = () => {
   return (
     <div>
       <form className="mx-auto my-4" onSubmit={handleSubmit} style={{ maxWidth: '500px' }}>
+
+        <h4>Realize seu Cadastro</h4>
+
+        <p> <small>
+            Preencha todas as informações necessárias abaixo para criar sua conta
+          </small> </p>
 
         <div className="form-group">
           <label htmlFor="name">Digite seu nome</label>
@@ -63,10 +74,10 @@ const SignUp = () => {
             onChange={handleChangeInput} value={cpassword} required />
         </div>
 
-        <button type="submit" className="btn btn-dark w-100">Logar</button>
+        <button type="submit" className="btn btn-dark w-100" disabled={state && state.loading}>Cadastrar</button>
 
         <p className="my-2">Já possui conta?
-          <Link href="/sign-in"><a style={{ color: "crimson" }}>Logar</a></Link>
+          <Link href="/sign-in"><a style={{ color: "crimson" }}> Logar agora</a></Link>
         </p>
       </form>
 

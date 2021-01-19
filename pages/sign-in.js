@@ -27,7 +27,7 @@ const SignIn = () => {
 
     if (res.err) return dispatch({ type: ACTIONS.NOTIFY, payload: { error: res.err } })
 
-    dispatch({ type: ACTIONS.NOTIFY, payload: { success: res.msg } })
+    dispatch({ type: ACTIONS.NOTIFY, payload: { success: 'Bem vindo!' } })
 
     dispatch({
       type: ACTIONS.AUTH, payload: {

@@ -38,7 +38,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <form className="mx-auto my-4" onSubmit={handleSubmit} style={{ maxWidth: '500px' }}>
+      <form className="mx-auto my-4" onSubmit={e => {handleSubmit(e)}} style={{ maxWidth: '500px' }}>
 
         <h4>Realize seu Cadastro</h4>
 

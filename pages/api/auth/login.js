@@ -28,6 +28,8 @@ export const login = async (req, res) => {
         const access_token = createAccessToken({id: user._id})
         const refresh_token = createRefreshToken({id: user._id})
 
+        console.log("Usuario logado com sucesso: ", user.email)
+
         res.json({
             access_token,
             refresh_token,

@@ -50,7 +50,13 @@ const SignIn = () => {
   return (
     <div>
 
-      <form className="mx-auto my-4" onSubmit={handleSubmit} style={{ maxWidth: '500px' }}>
+      <form className="mx-auto my-4" onSubmit={e => {handleSubmit(e)}} style={{ maxWidth: '500px' }}>
+
+      <h4>Realize seu login</h4>
+
+      <p> <small>
+          Preencha todas as informações necessárias abaixo para acessar sua conta
+        </small> </p>
 
         <div className="form-group">
           <label htmlFor="email">Digite seu Email</label>

@@ -16,6 +16,8 @@ export default function Home() {
             <div className="col">
               <div className="text-center">
 
+              <h3>NextJS + JWT + BOILERPLATE</h3>
+
                 <h4>Bem vindo! {auth.user.name}</h4>
 
                 <div className="card-body">
@@ -35,6 +37,9 @@ export default function Home() {
         <div className="row align-items-center">
           <div className="col">
             <div className="text-center">
+
+              <h3>NextJS + JWT + BOILERPLATE</h3>
+
               <div className="card-body">
                 <h4>Por favor faça o login!</h4>
                 <Link href="/sign-in">
